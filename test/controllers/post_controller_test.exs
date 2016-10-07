@@ -24,6 +24,7 @@ defmodule Pxblog.PostControllerTest do
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
     conn = post conn, post_path(conn, :create), post: @invalid_attrs
     assert html_response(conn, 200) =~ "New post"
+    refute Repo.get_by(Post, @invalid_attrs)
   end
 
   test "shows chosen resource", %{conn: conn} do
